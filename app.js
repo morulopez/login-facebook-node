@@ -1,6 +1,23 @@
 var express = require('express');
 var bodyParser = require('body-parser');
+var mysql = require('mysql');
 var app = express();
+var con = mysql.createConnection({
+  host: "127.0.0.1",
+  user: "root",
+  password: "Jesus17121987.",
+  database: "scrapperdatabase"
+});
+
+con.connect(function(err) {
+  if (err) throw err;
+  con.query("SELECT * FROM facebook_groups", function (err, result, fields) {
+    if (err) throw err;
+    console.log(result);
+  });
+});
+
+
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 app.use((req, res, next) => {
@@ -53,6 +70,6 @@ app.post("/v1/app-node/login-facebook",(req,res)=>{
     },3000)
 })
 
-app.listen(9529,()=>{
+app.listen(9429,()=>{
   console.log("iiiilllllooooooooooooooooooooooooo")
 })
