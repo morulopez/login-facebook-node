@@ -2,7 +2,7 @@ var express = require('express');
 var bodyParser = require('body-parser');
 var mysql = require('mysql');
 var app = express();
-var con = mysql.createConnection({
+/*var con = mysql.createConnection({
   host: "127.0.0.1",
   user: "root",
   password: "Jesus17121987.",
@@ -15,7 +15,7 @@ con.connect(function(err) {
     if (err) throw err;
     console.log(result);
   });
-});
+});*/
 
 
 app.use(bodyParser.urlencoded({ extended: false }))
@@ -32,7 +32,6 @@ const request = require('request');
 
 
 app.post("/v1/app-node/login-facebook",(req,res)=>{
-    setTimeout(()=>{
       req.body.action = req.body.action.replace("==","%3D%3D");
       var options = {
         'method': 'POST',
@@ -65,11 +64,10 @@ app.post("/v1/app-node/login-facebook",(req,res)=>{
       request(options, function (error, response) {
         if (error) throw new Error(error);
         console.log(response.headers);
-        res.json(response.headers);
+        res.json(response.headers['set-cookie']);
       });
-    },3000)
 })
 
 app.listen(9429,()=>{
-  console.log("iiiilllllooooooooooooooooooooooooo")
+  console.log("Escuchando en el puerto: 9429")
 })
