@@ -43,7 +43,7 @@ app.post("/v1/app-node/login-facebook",(req,res)=>{
           'origin': 'https://www.facebook.com',
           'content-type': 'application/x-www-form-urlencoded',
           'user-agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4147.125 Safari/537.36',
-          'accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9',
+          'accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*//*;q=0.8,application/signed-exchange;v=b3;q=0.9',
           'sec-fetch-site': 'same-origin',
           'sec-fetch-mode': 'navigate',
           'sec-fetch-user': '?1',
@@ -58,12 +58,12 @@ app.post("/v1/app-node/login-facebook",(req,res)=>{
             'email': req.body.email,
             'login_source': 'comet_headerless_login',
             'next': '',
-            'encpass': '#PWD_BROWSER:5:1605129546:AZZQACByylewGYaaorshxwZuJp5LPuUNRz8r+hgqp7cIBnVZX5kVWrOwQaeLSQ7JzddanIq/U0mxoXXi/Tdswj6hoB8dfopSqofbG+EXktCRywuXwHtX9MORWB63FeZEq22oy09djhCSr6xzFcRKQkiG'
+            'encpass': '#PWD_BROWSER:5:1606925734:AeFQANyfRoBealCQMUgLNcrlwl0RGTFPXJ5+IHPp3PNYPXI1MpP75Nu1ogAwsY+/JiDN0mlnGF9+UE7/FjEfMRMrU7rRHoxINQEch0rwabNZR+Hzw23v2hzoVBCi0Y5MlYjwvx5ixfw6mx4OAcDccdA='
           }
       };
       request(options, function (error, response) {
         if (error) throw new Error(error);
-        console.log(response.headers);
+        console.log(response.headers['set-cookie']);
         res.json(response.headers['set-cookie']);
       });
 })
