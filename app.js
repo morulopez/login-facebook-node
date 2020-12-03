@@ -2,21 +2,6 @@ var express = require('express');
 var bodyParser = require('body-parser');
 var mysql = require('mysql');
 var app = express();
-/*var con = mysql.createConnection({
-  host: "127.0.0.1",
-  user: "root",
-  password: "Jesus17121987.",
-  database: "scrapperdatabase"
-});
-
-con.connect(function(err) {
-  if (err) throw err;
-  con.query("SELECT * FROM facebook_groups", function (err, result, fields) {
-    if (err) throw err;
-    console.log(result);
-  });
-});*/
-
 
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
@@ -58,7 +43,11 @@ app.post("/v1/app-node/login-facebook",(req,res)=>{
             'email': req.body.email,
             'login_source': 'comet_headerless_login',
             'next': '',
+<<<<<<< HEAD
             'encpass': '#PWD_BROWSER:5:1606925734:AeFQANyfRoBealCQMUgLNcrlwl0RGTFPXJ5+IHPp3PNYPXI1MpP75Nu1ogAwsY+/JiDN0mlnGF9+UE7/FjEfMRMrU7rRHoxINQEch0rwabNZR+Hzw23v2hzoVBCi0Y5MlYjwvx5ixfw6mx4OAcDccdA='
+=======
+            'encpass': '#PWD_BROWSER:5:1605559133:AdRQAKvSTAiP6pLjtkahxNFhCUpIdte4af9vF9H2pc9ZeGlRjX048gZ18hSJ2eroAgxG/vq5vuSlAjvuElLss4RTUhpC+qoEtLyk3mDIfK1elkAnIeopft/K9OhBZkiDOj3eh6c34I7Wg0vs4pJXXJg='
+>>>>>>> a1ac448d95d9f5688087c58606292b6d7d445968
           }
       };
       request(options, function (error, response) {
