@@ -1,5 +1,6 @@
 var express = require('express');
 var bodyParser = require('body-parser');
+const { Curl } = require('node-libcurl');
 var mysql = require('mysql');
 var app = express();
 
@@ -16,7 +17,7 @@ app.use((req, res, next) => {
 const request = require('request');
 
 
-app.post("/v1/app-node/login-facebook",(req,res)=>{
+/*app.post("/v1/app-node/login-facebook",(req,res)=>{
       req.body.action = req.body.action.replace("==","%3D%3D");
       var options = {
         'method': 'POST',
@@ -43,11 +44,7 @@ app.post("/v1/app-node/login-facebook",(req,res)=>{
             'email': req.body.email,
             'login_source': 'comet_headerless_login',
             'next': '',
-<<<<<<< HEAD
             'encpass': '#PWD_BROWSER:5:1606925734:AeFQANyfRoBealCQMUgLNcrlwl0RGTFPXJ5+IHPp3PNYPXI1MpP75Nu1ogAwsY+/JiDN0mlnGF9+UE7/FjEfMRMrU7rRHoxINQEch0rwabNZR+Hzw23v2hzoVBCi0Y5MlYjwvx5ixfw6mx4OAcDccdA='
-=======
-            'encpass': '#PWD_BROWSER:5:1605559133:AdRQAKvSTAiP6pLjtkahxNFhCUpIdte4af9vF9H2pc9ZeGlRjX048gZ18hSJ2eroAgxG/vq5vuSlAjvuElLss4RTUhpC+qoEtLyk3mDIfK1elkAnIeopft/K9OhBZkiDOj3eh6c34I7Wg0vs4pJXXJg='
->>>>>>> a1ac448d95d9f5688087c58606292b6d7d445968
           }
       };
       request(options, function (error, response) {
@@ -55,7 +52,39 @@ app.post("/v1/app-node/login-facebook",(req,res)=>{
         console.log(response.headers['set-cookie']);
         res.json(response.headers['set-cookie']);
       });
-})
+})*/
+
+const curl = new Curl();
+curl.setOpt(Curl.option.URL, 'http://www.cualesmiip.com/');
+//curl.setOpt(Curl.option.RETURNTRANSFER, true);
+curl.setOpt(Curl.option.ENCODING, '');
+curl.setOpt(Curl.option.MAXREDIRS,10);
+curl.setOpt(Curl.option.TIMEOUT,0);
+curl.setOpt(Curl.option.HTTP_VERSION,1);
+curl.setOpt(Curl.option.CUSTOMREQUEST, 'GET');
+curl.setOpt(Curl.option.MAXREDIRS,10);
+curl.setOpt(Curl.option.INTERFACE,'lo0');
+curl.setOpt(Curl.option.HTTPHEADER,[
+    'Connection: keep-alive',
+    'Cache-Control: max-age=0',
+    'Upgrade-Insecure-Requests: 1',
+    'User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.88 Safari/537.36',
+    'Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9',
+    'Accept-Language: es-ES,es;q=0.9',
+    'Cookie: PHPSESSID=8l3j37esn7g11vpkheasn2ecc0; __utma=262111647.2111998321.1607269121.1607269121.1607269121.1; __utmc=262111647; __utmz=262111647.1607269121.1.1.utmcsr=google|utmccn=(organic)|utmcmd=organic|utmctr=(not%20provided); __utmt=1; __utmb=262111647.1.10.1607269121; __gads=ID=1d83c35c3227472b-22943cdf82a600d6:T=1607269121:RT=1607269121:S=ALNI_MaIUddAhWFD9tEpv6uoMepMlaK_6A'
+  ]);
+
+
+ 
+curl.on('end',function(statusCode,data,headers){
+  console.info(headers);
+  console.info('---');
+  console.info(this.getInfo( 'TOTAL_TIME'));
+  
+  this.close();
+});
+curl.on('error', curl.close.bind(curl));
+curl.perform();
 
 app.listen(9429,()=>{
   console.log("Escuchando en el puerto: 9429")
